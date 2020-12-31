@@ -1,0 +1,38 @@
+<ngx-spinner>
+    <h3>making payment...</h3>
+</ngx-spinner>
+
+<div  *ngIf="cartItems.length < 1">
+    <div class="alert alert-info text-center">
+        <h4>Your Cart is Empty</h4>
+    </div>
+</div>
+
+<div  *ngIf="cartItems.length > 0">
+    <div class="alert alert-info text-center">
+        <h4>Your Cart</h4>
+    </div>
+    <div class="tetx-center">
+        <ul class="list-group">
+            <li class="list-group-item"  *ngFor="let item of cartItems; index as i">
+                <div class="row">
+                    <div class="col-md-10">
+                        <app-cart-item [cartItem]="item"></app-cart-item>
+                    </div>
+                    <div class="col-md-2">
+                        <i class="far fa-trash-alt fa-2x" (click)="deleteItem(i)"></i>
+                    </div>
+                </div>
+            </li>
+          </ul>
+    </div>
+    <div class="alert alert-warning text-center">
+        <strong>Total: </strong>{{total}} €
+    </div>
+    <button class="btn btn-outline-danger btn-block mb-2" (click)="emptyCart()">
+        <i class="fas fa-ban"></i> Empty Cart
+    </button>
+
+    <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+    
+</div>
